@@ -16,6 +16,7 @@ module.exports = {
         subtitleGray: "#4F4F4F",
 
         purple1: "#CCB6FF",
+        purple2: "#EDE5FF",
         backgroundRed: "#FFD7E0",
 
         darkBlue: "hsl(228, 39%, 23%)",
