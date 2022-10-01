@@ -14,13 +14,9 @@ import {
 import LightModeIcon from "@mui/icons-material/LightMode";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
-export default function MultilineTextFields() {
-  const info = ["Event name", "Host name", "Location"];
-
-  const [startDT, setStartDT] = useState(dayjs(new Date()));
-  const [endDT, setEndDT] = useState(dayjs(new Date()));
-
-  const [photoURL, setPhotoURL] = useState(undefined);
+const CreateEventPage = ({ eventInfo, setEventInfo }) => {
+  const top3Info = ["Event name", "Host name", "Location"];
+  const allInfoKeys = Object.keys(eventInfo);
 
   const CustomTabs = (props) => (
     <Fragment>
@@ -40,25 +36,45 @@ export default function MultilineTextFields() {
         autoComplete="off"
         className="w-5/6 flex flex-col mx-auto space-y-4 md:space-y-10"
       >
-        {info.map((item) => (
-          <TextField
-            key={item}
-            id="standard-textarea"
-            label={item}
-            placeholder="Placeholder"
-            multiline
-            variant="standard"
-            sx={{ color: "white" }}
-          />
-        ))}
+        <TextField
+          id="standard-textarea"
+          label={"Event name"}
+          placeholder="Placeholder"
+          multiline
+          variant="standard"
+          onChange={(e) => {
+            setEventInfo({ ...eventInfo, eventName: e.target.value });
+          }}
+        />
+        <TextField
+          id="standard-textarea"
+          label={"Host name"}
+          placeholder="Placeholder"
+          multiline
+          variant="standard"
+          onChange={(e) => {
+            setEventInfo({ ...eventInfo, hostName: e.target.value });
+          }}
+        />
+        <TextField
+          id="standard-textarea"
+          label={"Location"}
+          placeholder="Placeholder"
+          multiline
+          variant="standard"
+          onChange={(e) => {
+            setEventInfo({ ...eventInfo, location: e.target.value });
+          }}
+        />
+
         <br />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
             label="Start time & date"
             renderInput={(params) => <TextField {...params} />}
-            value={startDT}
+            value={eventInfo.startDT}
             onChange={(newValue) => {
-              setStartDT(newValue);
+              setEventInfo({ ...eventInfo, startDT: newValue });
             }}
             hideTabs={false}
             components={{ Tabs: CustomTabs }}
@@ -72,9 +88,10 @@ export default function MultilineTextFields() {
           <DateTimePicker
             label="End time & date"
             renderInput={(params) => <TextField {...params} />}
-            value={endDT}
+            value={eventInfo.endDT}
             onChange={(newValue) => {
-              setEndDT(newValue);
+              setEventInfo({ ...eventInfo, endDT: newValue });
+              //   console.log(dayjs(new Date()));
             }}
             hideTabs={false}
             components={{ Tabs: CustomTabs }}
@@ -97,11 +114,18 @@ export default function MultilineTextFields() {
               multiple
               type="file"
               onChange={(e) => {
-                setPhotoURL(URL.createObjectURL(e.target.files[0]));
+                setEventInfo({
+                  ...eventInfo,
+                  photoURL: URL.createObjectURL(e.target.files[0]),
+                });
               }}
             />
           </Button>
-          <img src={photoURL} alt="uploadedImg" className="w-24 mx-auto"></img>
+          <img
+            src={eventInfo.photoURL}
+            alt="EventPhoto"
+            className="w-24 mx-auto"
+          ></img>
         </div>
       </Box>
       <Link
@@ -112,4 +136,6 @@ export default function MultilineTextFields() {
       </Link>
     </div>
   );
-}
+};
+
+export default CreateEventPage;
