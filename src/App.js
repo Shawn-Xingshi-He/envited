@@ -9,16 +9,17 @@ function App() {
   const [eventInfo, setEventInfo] = useState({
     eventName: "",
     hostName: "",
-    location: "",
-    startDT: dayjs(new Date()),
-    endDT: dayjs(new Date()),
+    location: {
+      Name: "",
+      Street: "",
+      Suburb: "",
+      State: "",
+      Postcode: "",
+    },
+    startDT: dayjs(new Date()).format("YYYY-MM-DDTHH:mm"),
+    endDT: dayjs(new Date()).format("YYYY-MM-DDTHH:mm"),
     photoURL: "",
   });
-  // const [hostName, setHostName] = useState("");
-  // const [location, setLocation] = useState("");
-  // const [startDT, setStartDT] = useState(dayjs(new Date()));
-  // const [endDT, setEndDT] = useState(dayjs(new Date()));
-  // const [photoURL, setPhotoURL] = useState(undefined);
 
   return (
     <div className="App">

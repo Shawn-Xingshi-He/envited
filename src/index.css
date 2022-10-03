@@ -5,3 +5,7 @@
 body {
   background: linear-gradient(0deg, #f6f2ff, #f6f2ff), #fbfaff;
 }
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}
