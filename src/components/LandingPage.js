@@ -1,9 +1,34 @@
 import LandingImg from "../img/Landing page image.svg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const variants = {
+  form: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: "-100%",
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  },
+};
 
 function LandingPage() {
   return (
-    <div id="landingPage">
+    <motion.div {...variants.form} id="landingPage">
       <div className="container w-10/12 flex flex-col space-y-6 mx-auto mt-20 mb-6 text-center md:w-7/12 md:space-y-10 lg: lg:w-10/12 lg:flex-row-reverse lg:space-y-0 lg:justify-between">
         <div className="flex flex-col space-y-4 lg:text-right lg:self-center lg:w-2/5 lg:items-end">
           <div className="text-4xl md:text-6xl font-bold text-purpleDark">
@@ -33,13 +58,13 @@ function LandingPage() {
 
         <Link
           to="/create"
-          className="flex w-46 h-12 px-2 text-base mx-auto rounded-xl items-center justify-center text-white font-bold 
-           bg-gradient-to-r from-envitedPurple to-envitedPink hover:shadow-indigo-500/40 active:bg-violet-700  focus:ring focus:ring-violet-300 md:w-80 md:text-xl md:h-16 lg:hidden"
+          className="flex w-46 h-12 px-2 text-sm mx-auto rounded-xl items-center justify-center text-white font-bold 
+           bg-gradient-to-r from-envitedPurple to-envitedPink md:w-80 md:text-xl md:h-16 lg:hidden"
         >
           <span>🎉 Create my event</span>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

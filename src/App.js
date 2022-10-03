@@ -1,11 +1,14 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import dayjs from "dayjs";
 import LandingPage from "./components/LandingPage";
 import CreateEventPage from "./components/CreateEventPage";
 import EventPage from "./components/EventPage";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
+
   const [eventInfo, setEventInfo] = useState({
     eventName: "",
     hostName: "",
@@ -23,19 +26,21 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/create"
-          element={
-            <CreateEventPage
-              eventInfo={eventInfo}
-              setEventInfo={setEventInfo}
-            />
-          }
-        />
-        <Route path="/event" element={<EventPage eventInfo={eventInfo} />} />
-      </Routes>
+      <AnimatePresence>
+        <Routes location={location} key={location.key}>
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/create"
+            element={
+              <CreateEventPage
+                eventInfo={eventInfo}
+                setEventInfo={setEventInfo}
+              />
+            }
+          />
+          <Route path="/event" element={<EventPage eventInfo={eventInfo} />} />
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

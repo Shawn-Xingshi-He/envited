@@ -3,17 +3,48 @@ import { TextField, Button } from "@mui/material";
 import AddressField from "../formComponents/AddressField";
 import StartEndDTField from "../formComponents/StartEndDTField";
 import PhotoUpdateField from "../formComponents/PhotoUpdateField";
+import { motion } from "framer-motion";
+
+const variants = {
+  form: {
+    initial: {
+      opacity: 0,
+      x: "-100%",
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 1.5,
+        duration: 1.5,
+        ease: "easeOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: "-100%",
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  },
+};
 
 const CreateEventPage = ({ eventInfo, setEventInfo }) => {
   return (
-    <div className="container w-5/6 flex flex-col space-y-8 mx-auto my-20 py-8 rounded-lg bg-purple1 md:w-2/5 lg:w-1/3">
+    <motion.div
+      key="container"
+      {...variants.form}
+      className="container w-5/6 flex flex-col space-y-8 mx-auto my-20 py-8 rounded-lg bg-purple1 md:w-2/5 lg:w-1/3"
+    >
       <div className="flex mx-auto rounded-xl text-2xl lg:text-3xl text-purpleDark font-bold justify-center">
         <span>Event information</span>
       </div>
       <div className="w-full border-b-2 border-groove"></div>
       <div className="w-11/12 flex flex-col mx-auto space-y-10 items-center">
         {/* event name, host name */}
-        <div className="w-5/6 flex flex-col space-y-6 ">
+        <div className="form-items w-5/6 flex flex-col space-y-6 ">
           <TextField
             label={"Event name"}
             // defaultValue={eventInfo.eventName}
@@ -41,7 +72,10 @@ const CreateEventPage = ({ eventInfo, setEventInfo }) => {
         <div className="w-full border-b-2 border-dashed"></div>
 
         {/* location */}
-        <AddressField eventInfo={eventInfo} setEventInfo={setEventInfo} />
+        <div className="form-items">
+          <AddressField eventInfo={eventInfo} setEventInfo={setEventInfo} />
+        </div>
+
         <div className="w-full border-b-2 border-dashed"></div>
 
         {/* start, end date/time */}
@@ -61,7 +95,7 @@ const CreateEventPage = ({ eventInfo, setEventInfo }) => {
           Submit
         </Button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,5 +1,24 @@
 import { BsCalendar3 } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
+import { motion } from "framer-motion";
+
+const variants = {
+  form: {
+    initial: {
+      opacity: 0,
+      y: "-100%",
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 1.5,
+        duration: 1.5,
+        ease: "easeOut",
+      },
+    },
+  },
+};
 
 const formateTime = (date) => {
   let hours = date.getHours();
@@ -13,7 +32,6 @@ const formateTime = (date) => {
 
 const formateDT = (date) => {
   const fDate = new Date(date);
-  console.log(fDate);
   const hourMin = formateTime(fDate);
   return (
     fDate.getDate() +
@@ -27,9 +45,13 @@ const formateDT = (date) => {
 const timeZone = (date) => {
   return " UTC" + new Date(date).getTimezoneOffset() / 60;
 };
+
 function EventPage({ eventInfo }) {
   return (
-    <div className="container flex flex-col space-y-3 mx-auto text-purpleDark font-bold md:w-[593px] md:mt-24 md:space-y-6 lg:flex-row-reverse lg:w-2/3 lg:space-y-0 lg:mt-36">
+    <motion.div
+      {...variants.form}
+      className="container flex flex-col space-y-3 mx-auto text-purpleDark font-bold md:w-[593px] md:mt-24 md:space-y-6 lg:flex-row-reverse lg:w-2/3 lg:space-y-0 lg:mt-36"
+    >
       <img
         src={eventInfo.photoURL}
         alt="eventPhoto"
@@ -67,7 +89,7 @@ function EventPage({ eventInfo }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
