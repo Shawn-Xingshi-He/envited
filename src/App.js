@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <AnimatePresence>
         <Routes location={location} key={location.key}>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/envited" element={<LandingPage />} />
           <Route
             path="/create"
             element={
